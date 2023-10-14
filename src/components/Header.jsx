@@ -18,7 +18,7 @@ className='bg-transparent focus:outline-none w-24 sm:w-64 md:54' />
     <ul className='flex gap-4 '>
       <Link to='/'><li className='hidden sm:inline text-blue-950 hover:text-slate-400'>Home</li></Link>
       <Link to='/about'><li className='hidden sm:inline text-blue-950 hover:text-slate-400' >About</li></Link>
-      <Link to='/sign-in'><li className=' sm:inline text-blue-950 hover:text-slate-400'>Sign in</li></Link>
+      <Link to='/sign-in'><li className='sm:inline text-blue-950 hover:text-slate-400'>Sign in</li></Link>
       </ul>
     </div>
     </header>

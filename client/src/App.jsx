@@ -8,6 +8,8 @@ import Profile from './pages/Profile';
 import Header from './components/Header';
 import SignIn from './pages/SignIn';
 
+//importing the no page component
+import PageNotFound from './pages/pagenotfound'
 export default function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,7 @@ export default function App() {
       <Route path='/sign-up' element={<SignUp />}></Route>
       <Route path='/about' element={<About />}></Route>
       <Route path='/profile' element={<Profile />}></Route>
+      <Route path="*" element={<PageNotFound />} />
       
     </Routes>
     </BrowserRouter>

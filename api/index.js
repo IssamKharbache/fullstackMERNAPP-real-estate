@@ -13,6 +13,7 @@ then(()=>{
     console.log("Connection successfully")
 }).catch((err)=>{
     console.log("Connection failed");
+    console.log(err);
 });
 
 

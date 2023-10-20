@@ -1,6 +1,7 @@
 import {FaSearch} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import {  useSelector } from 'react-redux';
+import {FaSignOutAlt} from 'react-icons/fa';
 export default function Header() {
   const {currentUser} = useSelector((state) => state.user);
   return (
@@ -27,6 +28,9 @@ className='bg-transparent focus:outline-none w-24 sm:w-64 md:54' />
     : (<li className='sm:inline font-poppins text-white hover:text-red-950 '>Sign in</li>)
     }
      </Link> 
+     <Link to="/" >
+     <li className='text-white cursor-pointer text-2xl hover:opacity-80'><FaSignOutAlt /></li>
+     </Link>
       </ul>
     </div>
     </header>

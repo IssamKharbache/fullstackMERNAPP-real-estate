@@ -2,10 +2,11 @@ import {FaSearch} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import {  useSelector } from 'react-redux';
 import {FaSignOutAlt} from 'react-icons/fa';
+
 export default function Header() {
   const {currentUser} = useSelector((state) => state.user);
   return (
-    <header className='bg-blue-500 shadow-lg'>
+    <header className='bg-blue-500 shadow-lg sticky top-0 '>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'><h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
       <span className='text-white'>Real</span>

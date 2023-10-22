@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import {AiFillEyeInvisible ,AiFillEye} from 'react-icons/ai';
+
 import {
   signInStart,
   signInSuccess,
@@ -11,9 +13,12 @@ import OAuth from '../components/Oauth';
 export default function SignIn() {
   
   const [formData, setFormData] = useState({});
+  const [open , setOpen] = useState(false);
+
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,6 +48,9 @@ export default function SignIn() {
       dispatch(signInFailure(error.message));
     }
   };
+  const toggle = ()=>{
+    setOpen(!open); 
+  }
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
@@ -54,13 +62,16 @@ export default function SignIn() {
           id='email'
           onChange={handleChange}
         />
-        <input
-          type='password'
-          placeholder='password'
-          className='border p-3 rounded-lg'
-          id='password'
-          onChange={handleChange}
-        />
+        <div className="relative flex flex-col gap-4">
+         <input type={open ? 'text':'password'} id='password' placeholder='Password' className='border p-3 rounded-lg shadow-lg focus:outline-double relative' onChange={handleChange}  />
+         <div className='text-2xl absolute top-3 right-5'>  
+         {
+          open ?  <AiFillEye className='cursor-pointer' onClick={toggle}/> : <AiFillEyeInvisible  className='cursor-pointer' onClick={toggle}/>  
+         }
+        
+         
+         </div>
+       </div>
 
         <button
           disabled={loading}

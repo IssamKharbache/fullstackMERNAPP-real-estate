@@ -29,6 +29,6 @@ navigate('/');
 }
     };
   return (
-    <button onClick={handleGoogleClick} type='button' className='text-white bg-red-700 p-3 rounded-lg uppercase hover:opacity-90'>Continue with google</button>
+    <button onClick={handleGoogleClick} type='button' className='text-white bg-teal-600 p-3 rounded-lg uppercase hover:opacity-90'>Continue with google</button>
   )
 }

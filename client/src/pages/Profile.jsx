@@ -4,7 +4,10 @@ import {FaPencilAlt , FaEye} from 'react-icons/fa';
 import {AiFillEyeInvisible ,AiFillEye} from 'react-icons/ai'
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from  'firebase/storage';
 import { app } from '../firebase';
-import  {updateUserStart,updateUserSuccess,updateUserFailure} from '../redux/user/userSlice.js';
+import  {updateUserStart,updateUserSuccess,updateUserFailure,
+  deleteUserStart,deleteUserSuccess,deleteUserFailure
+} from '../redux/user/userSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
 
@@ -34,10 +37,13 @@ service firebase.storage {
   const [filepercentage,setFilePercentage] = useState(0);
   const [fileUploadError,setFileUploadError] = useState(false);
   const [formData,setFormData] = useState({});
+
   const [updatesuccess,setupdateSuccess] = useState(false);
+  const [deletesuccess,setdeletesuccess] = useState(false);
 
   const [open , setOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
  
 
   useEffect(()=>{
@@ -98,6 +104,27 @@ setFormData({...formData,
         dispatch(updateUserFailure(error.message));
       }
   }
+
+  const handleDeleteUser = async () =>{
+    try {
+      dispatch(deleteUserStart());
+      const res  = await fetch(`/api/user/delete/${currentUser._id}`,{
+        method:'DELETE',
+       
+      });
+      const data = await res.json();
+      if (data.success===false) {
+        dispatch(deleteUserFailure(data.message));
+        return ;
+      }dispatch(deleteUserSuccess(data.message));
+       navigate('/sign-in');
+
+    } catch (error) {
+      deleteUserFailure(error.message);    
+    }
+  }
+
+  //hide/show password
 const toggle = ()=>{
   setOpen(!open); 
 }
@@ -107,6 +134,7 @@ const toggle = ()=>{
       <form onSubmit={submitHandler} className='flex flex-col gap-4 '>
         
       {updatesuccess ? <p className='text-green-500 mx-auto h-10  font-bold'>User updated successfully </p> :""}
+     
       <div className='flex p-5 max-w-lg mx-auto'>
         <input type="file"  ref={fileRef} accept='image/*' onChange={(e)=>setFile(e.target.files[0])}  hidden/>
           <img  onClick={()=>fileRef.current.click()} src={formData.userAvatar || currentUser.userAvatar} className='rounded-full h-24 w-24 object-cover cursor-pointer self
@@ -146,7 +174,7 @@ const toggle = ()=>{
 :"Update"}</button>
 
         <div className=' flex justify-between'>
-          <p className=' text-red-500 font-semibold  cursor-pointer hover:opacity-80 center'>Delete Account</p>
+          <p className=' text-red-500 font-semibold  cursor-pointer hover:opacity-80 center' onClick={handleDeleteUser}>Delete Account</p>
           <p className=' text-red-500  font-semibold  cursor-pointer hover:opacity-80 '>Sign out</p>
         </div>
       </form>

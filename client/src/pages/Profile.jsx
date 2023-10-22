@@ -10,7 +10,7 @@ import  {updateUserStart,updateUserSuccess,updateUserFailure,
   signOutUserSuccess,
   signOutUserFailure,
 } from '../redux/user/userSlice.js';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Profile() {
 
@@ -186,6 +186,9 @@ const toggle = ()=>{
 </div>
 
 :"Update"}</button>
+<Link className='bg-green-700 text-white p-3 rounded-lg text-center uppercase hover:opacity-95' to='/create-listing'>
+  Create listing
+</Link>
 
         <div className=' flex justify-between'>
           <p className=' text-red-500 font-semibold  cursor-pointer hover:opacity-80 center' onClick={handleDeleteUser}>Delete Account</p>

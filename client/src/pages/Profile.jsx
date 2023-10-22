@@ -5,7 +5,10 @@ import {AiFillEyeInvisible ,AiFillEye} from 'react-icons/ai'
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from  'firebase/storage';
 import { app } from '../firebase';
 import  {updateUserStart,updateUserSuccess,updateUserFailure,
-  deleteUserStart,deleteUserSuccess,deleteUserFailure
+  deleteUserStart,deleteUserSuccess,deleteUserFailure,
+  signOutUserStart,
+  signOutUserSuccess,
+  signOutUserFailure,
 } from '../redux/user/userSlice.js';
 import { useNavigate } from 'react-router-dom';
 
@@ -39,7 +42,6 @@ service firebase.storage {
   const [formData,setFormData] = useState({});
 
   const [updatesuccess,setupdateSuccess] = useState(false);
-  const [deletesuccess,setdeletesuccess] = useState(false);
 
   const [open , setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -123,7 +125,18 @@ setFormData({...formData,
       deleteUserFailure(error.message);    
     }
   }
-
+const handleSignout = async () =>{
+  try {
+    const res = await fetch('/api/auth/signout');
+    const data = await res.json();
+    if (data.success === false) {
+      dispatch(signOutUserFailure(data.message));
+       return;
+    } dispatch(signOutUserSuccess(data.message));
+  } catch (error) {
+    dispatch(signOutUserFailure(error.message));
+  }
+}
   //hide/show password
 const toggle = ()=>{
   setOpen(!open); 
@@ -175,7 +188,7 @@ const toggle = ()=>{
 
         <div className=' flex justify-between'>
           <p className=' text-red-500 font-semibold  cursor-pointer hover:opacity-80 center' onClick={handleDeleteUser}>Delete Account</p>
-          <p className=' text-red-500  font-semibold  cursor-pointer hover:opacity-80 '>Sign out</p>
+          <p onClick={handleSignout} className=' text-red-500  font-semibold  cursor-pointer hover:opacity-80 '>Sign out</p>
         </div>
       </form>
      

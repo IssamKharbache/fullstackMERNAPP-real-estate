@@ -8,15 +8,17 @@ import {
 import { app } from "../firebase.js";
 
 export default function CreateListing() {
+  //states to handle changes
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
   });
-
+  // states to hundle errors and loading effect
   const [imagesUploadError, setImagesUploadError] = useState(false);
   const [imageUploadSuccess, setImageUploadSuccess] = useState(false);
   const [uploading, setUploading] = useState(false);
 
+  //handling uplodading listing images
   const handleImageSubmit = (e) => {
     if (files.length > 0 && formData.imageUrls.length + files.length < 7) {
       setUploading(true);
@@ -48,6 +50,7 @@ export default function CreateListing() {
       setUploading(false);
     }
   };
+
   const storeImage = async (image) => {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
@@ -73,12 +76,14 @@ export default function CreateListing() {
     });
   };
 
+  //handle deleting image
   const handleRemoveImage = (index) => {
     setFormData({
       ...formData,
       imageUrls: formData.imageUrls.filter((_, ind) => ind !== index),
     });
   };
+
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">

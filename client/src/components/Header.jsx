@@ -11,7 +11,7 @@ export default function Header() {
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
             <span className="text-white">Real</span>
-            <span className="text-gray-400">Esatate</span>
+            <span className="text-gray-400">Estate</span>
           </h1>
         </Link>
 

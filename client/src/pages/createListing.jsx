@@ -34,7 +34,6 @@ export default function CreateListing() {
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
 
   const navigate = useNavigate();
 

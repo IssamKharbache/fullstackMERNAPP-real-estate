@@ -232,7 +232,7 @@ service firebase.storage {
               Error Image upload(Image must be less than 2mb)
             </span>
           ) : filepercentage > 0 && filepercentage < 100 ? (
-            <span className="text-slate-700">{`Uploading ${filepercentage} %`}</span>
+            <span className="text-slate-700">{`Uploading ${filepercentage}%`}</span>
           ) : filepercentage === 100 ? (
             <span className="text-green-700">Done uploading image</span>
           ) : (
@@ -279,7 +279,7 @@ service firebase.storage {
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="inline w-6 h-6 mr-2 text-gray-900 animate-spin dark:text-gray-900 fill-blue-600"
+                class="inline w-6 h-6 mr-2 text-gray-900 animate-spin dark:text-gray-900 fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -293,7 +293,7 @@ service firebase.storage {
                   fill="currentFill"
                 />
               </svg>
-              <span className="sr-only">Loading...</span>
+              <span class="sr-only">Loading...</span>
             </div>
           ) : (
             "Update"
@@ -340,7 +340,7 @@ service firebase.storage {
               key={listing._id}
               className=" gap-3 border rounded-lg p-3 border-gray-500 flex justify-between items-center"
             >
-              <Link to={`/listings/${currentUser._id}`}>
+              <Link to={`/listing/${currentUser._id}`}>
                 <img
                   src={listing.imageUrls[0]}
                   className="h-16 w-16 object-contain rounded-lg"
@@ -348,7 +348,7 @@ service firebase.storage {
               </Link>
               <Link
                 className="text-slate-700 font-semibold flex-1 hover:underline truncate"
-                to={`/listings/${currentUser._id}`}
+                to={`/listing/${listing._id}`}
               >
                 <p>{listing.name}</p>
               </Link>

@@ -117,6 +117,21 @@ service firebase.storage {
     }
   };
 
+  const handleSignout = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data.message));
+    } catch (error) {
+      dispatch(signOutUserFailure(error.message));
+    }
+  };
+
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
@@ -132,20 +147,6 @@ service firebase.storage {
       navigate("/sign-in");
     } catch (error) {
       deleteUserFailure(error.message);
-    }
-  };
-  const handleSignout = async () => {
-    try {
-      dispatch(signOutUserStart());
-      const res = await fetch("/api/auth/signout");
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signOutUserFailure(data.message));
-        return;
-      }
-      dispatch(signOutUserSuccess(data.message));
-    } catch (error) {
-      dispatch(signOutUserFailure(error.message));
     }
   };
   //hide/show password

@@ -232,7 +232,7 @@ service firebase.storage {
               Error Image upload(Image must be less than 2mb)
             </span>
           ) : filepercentage > 0 && filepercentage < 100 ? (
-            <span className="text-slate-700">{`Uploading ${filepercentage}`}</span>
+            <span className="text-slate-700">{`Uploading ${filepercentage} %`}</span>
           ) : filepercentage === 100 ? (
             <span className="text-green-700">Done uploading image</span>
           ) : (
@@ -279,7 +279,7 @@ service firebase.storage {
             <div role="status">
               <svg
                 aria-hidden="true"
-                class="inline w-6 h-6 mr-2 text-gray-900 animate-spin dark:text-gray-900 fill-blue-600"
+                className="inline w-6 h-6 mr-2 text-gray-900 animate-spin dark:text-gray-900 fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -293,7 +293,7 @@ service firebase.storage {
                   fill="currentFill"
                 />
               </svg>
-              <span class="sr-only">Loading...</span>
+              <span className="sr-only">Loading...</span>
             </div>
           ) : (
             "Update"
@@ -360,12 +360,14 @@ service firebase.storage {
                 >
                   delete
                 </button>
-                <button
-                  type="button"
-                  className="text-green-600 hover:opacity-70 uppercase font-bold"
-                >
-                  edit
-                </button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button
+                    type="button"
+                    className="text-green-600 hover:opacity-70 uppercase font-bold"
+                  >
+                    edit
+                  </button>
+                </Link>
               </div>
             </div>
           ))}

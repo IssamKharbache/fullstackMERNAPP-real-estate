@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import SignIn from "./pages/SignIn";
 import PrivateRoute from "./components/privateRoute";
 import CreateListing from "./pages/createListing";
+import UpdateListing from "./pages/updateListing";
 //importing the no page component
 import PageNotFound from "./pages/pagenotfound";
 
@@ -26,6 +27,10 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
           <Route path="/create-listing" element={<CreateListing />} />
+          <Route
+            path="/update-listing/:listingId"
+            element={<UpdateListing />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

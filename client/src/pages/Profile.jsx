@@ -116,22 +116,7 @@ service firebase.storage {
       dispatch(updateUserFailure(error.message));
     }
   };
-
-  const handleSignout = async () => {
-    try {
-      dispatch(signOutUserStart());
-      const res = await fetch("/api/auth/signout");
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signOutUserFailure(data.message));
-        return;
-      }
-      dispatch(signOutUserSuccess(data.message));
-    } catch (error) {
-      dispatch(signOutUserFailure(error.message));
-    }
-  };
-
+  //delete user
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
@@ -149,6 +134,23 @@ service firebase.storage {
       deleteUserFailure(error.message);
     }
   };
+
+  //signout
+  const handleSignout = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data.message));
+    } catch (error) {
+      dispatch(signOutUserFailure(error.message));
+    }
+  };
+
   //hide/show password
   const toggle = () => {
     setOpen(!open);

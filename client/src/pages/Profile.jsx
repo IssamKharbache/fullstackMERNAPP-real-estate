@@ -167,6 +167,24 @@ service firebase.storage {
       setShowListingsError(true);
     }
   };
+
+  const handleDeleteListings = async (listingId) => {
+    try {
+      const res = await fetch(`api/listing/delete/${listingId}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-4xl text-center p-3 m-4">Profile</h1>
@@ -333,6 +351,7 @@ service firebase.storage {
               </Link>
               <div className="flex flex-col items-center">
                 <button
+                  onClick={() => handleDeleteListings(listing._id)}
                   type="button"
                   className="text-red-500 hover:opacity-70 font-bold uppercase"
                 >

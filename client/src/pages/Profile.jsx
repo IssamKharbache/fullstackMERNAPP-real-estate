@@ -193,7 +193,7 @@ service firebase.storage {
       <h1 className="text-4xl text-center p-3 m-4">Profile</h1>
       <form onSubmit={submitHandler} className="flex flex-col gap-4 ">
         {updatesuccess ? (
-          <p className="text-green-500 mx-auto h-10  font-bold">
+          <p className="text-green-700 mx-auto h-10  font-bold">
             User updated successfully{" "}
           </p>
         ) : (

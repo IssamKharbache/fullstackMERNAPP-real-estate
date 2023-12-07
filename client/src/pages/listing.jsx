@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
+import { Contact } from "../components/Contact.jsx";
+
 import {
   FaShare,
   FaMapMarkerAlt,
@@ -11,8 +13,10 @@ import {
   FaChair,
   FaBath,
 } from "react-icons/fa";
+
 import "swiper/css/bundle";
 import { useSelector } from "react-redux";
+
 export default function ListingPage() {
   const params = useParams();
   SwiperCore.use([Navigation]);
@@ -21,7 +25,7 @@ export default function ListingPage() {
   const [loading, setLoading] = useState(false);
   const [errorListing, setError] = useState("");
 
-  const [userdata, SetUserData] = useState(null);
+  const [contactForm, setContactForm] = useState(false);
 
   const { currentUser } = useSelector((state) => state.user);
   const [copied, setCopied] = useState(false);
@@ -49,7 +53,6 @@ export default function ListingPage() {
     };
     fetchListing();
   }, [params.listingId]);
-
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
@@ -112,9 +115,9 @@ export default function ListingPage() {
             ) : (
               <p className="w-full max-w-[200px] text-white text-center text-xl p-1 rounded-md bg-green-700">
                 ${listing.regularPrice}
+                {listing.type === "rent" && "/month"}
               </p>
             )}
-            {listing.type === "rent" && " / month"}
 
             <p className="flex items-center mt-6 gap-4 text-slate-600  text-sm">
               <FaMapMarkerAlt className="text-green-700" />
@@ -154,6 +157,18 @@ export default function ListingPage() {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
+            {currentUser &&
+              !contactForm &&
+              listing.userRef !== currentUser._id && (
+                <button
+                  type="button"
+                  onClick={() => setContactForm(true)}
+                  className="bg-emerald-700 text-white rounded-lg p-3 hover:opacity-80 font-bold"
+                >
+                  Contact owner
+                </button>
+              )}
+            {contactForm && <Contact listing={listing} />}
           </div>
         </>
       )}
